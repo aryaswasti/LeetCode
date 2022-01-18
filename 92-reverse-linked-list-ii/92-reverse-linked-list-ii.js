@@ -11,51 +11,32 @@
  * @param {number} right
  * @return {ListNode}
  */
-var reverseBetween = function(head, left, right) {
-    let current = head, pos = 1, reverse_list = null, start = null, tail = null, next = null;
-    if(head.next == null || head == null || left == right)
-        return head;
-    else
-        {
-            while(current)
-            {
-                if(left == 1)
-                    {
-                        start = null;
-                        tail = current;
-                        while(pos <= right)
-                            {
-                                next = current.next;
-                                current.next = reverse_list;
-                                reverse_list = current;
-                                current = next;
-                                pos++;
-                            }
-                        //start.next = reverse_list;
-                        tail.next = current;
-                        return reverse_list;
-                    }
-                else if(pos == left-1)
-                    {
-                        start = current;
-                        tail = current.next;
-                    }
-                else if(pos == left)
-                    {
-                        while(pos <= right)
-                            {
-                                next = current.next;
-                                current.next = reverse_list;
-                                reverse_list = current;
-                                current = next;
-                                pos++;
-                            }
-                        start.next = reverse_list;
-                        tail.next = current;
-                        return head;
-                    }
-                current = current.next;
-                pos++;
-            }
-        }
+var reverseBetween = function(head, m, n) {
+  let currentPos = 1, currentNode = head;
+  let start = head;
+  
+  while(currentPos < m) {
+    start = currentNode;
+    currentNode = currentNode.next;
+    currentPos++;
+  }
+  
+  let newList = null, tail = currentNode;
+  
+  while(currentPos >= m && currentPos <= n) {
+    const next = currentNode.next;
+    currentNode.next = newList;
+    newList = currentNode;
+    currentNode = next;
+    currentPos++;
+  }
+  
+  start.next = newList;
+  tail.next = currentNode;
+  
+  if(m > 1) {
+    return head
+  } else {
+    return newList;
+  }
 };
