@@ -4,38 +4,42 @@
  * @return {number}
  */
 
-const swap = function (array, i, j) {
-  const temp = array[i];
-  array[i] = array[j];
-  array[j] = temp;
-};
-
-const getPartition = function (nums, left, right) {
-  const pivotElement = nums[right];
-  let partitionIdx = left;
-
-  for (let j = left; j < right; j++) {
-    if (nums[j] <= pivotElement) {
-      swap(nums, partitionIdx, j);
-      partitionIdx++;
+const quickSort = function(arr, left, right)
+{
+    if(left < right)
+    {
+        const partitionIdx = partition(arr, left, right);
+        quickSort(arr, left, partitionIdx - 1);
+        quickSort(arr, partitionIdx + 1, right);
     }
-  }
-  swap(nums, partitionIdx, right)
+}
 
-  return partitionIdx;
-};
+const partition = function(arr, left, right)
+{
+    let pivElement = arr[right];
+    let i = left;
+    
+    for(let j = left; j < right; j++)
+    {
+        if(arr[j] < pivElement)
+        {
+            swap(arr, i, j);
+            i++;
+        }
+    }
+    swap(arr, i, right);
+    return i;
+}
 
-const quickSort = function (nums, left, right) {
-  if(left < right) {
-    const partitionIndex = getPartition(nums, left, right);
+const swap = function(arr, i, j)
+{
+    let temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
 
-    quickSort(nums, left, partitionIndex - 1);
-    quickSort(nums, partitionIndex + 1, right);
-  }
-};
-
-var findKthLargest = function (nums, k) {
-  const indexToFind = nums.length - k;
-  quickSort(nums, 0, nums.length - 1);
-  return nums[indexToFind]
+var findKthLargest = function(nums, k) {
+    const numToFind = nums.length - k;
+    quickSort(nums, 0, nums.length - 1);
+    return nums[numToFind];
 };
