@@ -4,42 +4,48 @@
  * @return {number}
  */
 
-const quickSort = function(arr, left, right)
+const quickSelect = function(arr, left, right, numToFind)
 {
-    if(left < right)
+    let piv = partition(arr, left, right);
+    if(piv === numToFind)
     {
-        const partitionIdx = partition(arr, left, right);
-        quickSort(arr, left, partitionIdx - 1);
-        quickSort(arr, partitionIdx + 1, right);
+        return arr[numToFind];   
     }
-}
+    else if(numToFind < piv)
+    {
+        return quickSelect(arr, left, piv - 1, numToFind);   
+    }
+    else
+    {
+        return quickSelect(arr, piv + 1, right, numToFind);   
+    }
+};
 
 const partition = function(arr, left, right)
 {
-    let pivElement = arr[right];
     let i = left;
     
-    for(let j = left; j < right; j++)
+    for(let j = left; j <= right; j++)
     {
-        if(arr[j] < pivElement)
+        if(arr[j] <= arr[right])
         {
             swap(arr, i, j);
             i++;
         }
     }
-    swap(arr, i, right);
-    return i;
-}
+    
+    return i - 1;
+};
+
 
 const swap = function(arr, i, j)
 {
     let temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
-}
+};
 
 var findKthLargest = function(nums, k) {
     const numToFind = nums.length - k;
-    quickSort(nums, 0, nums.length - 1);
-    return nums[numToFind];
+    return quickSelect(nums, 0, nums.length - 1, numToFind);
 };
