@@ -28,12 +28,14 @@ public:
             if(frontEle->right)
                 q.push(frontEle->right);
             
+            if(ele == level - 1)
+                res.push_back(frontEle->val);
+            
             q.pop();
             ele++;
             
             if(level == ele)
             {
-                res.push_back(frontEle->val);
                 level = q.size();
                 ele = 0;
             }
