@@ -49,7 +49,7 @@ class Solution {
 public:
     void dfs(TreeNode* root, int level, vector<int> &res)
     {
-        if(level > res.size())
+        if(level >= res.size())
             res.push_back(root->val);
         
         if(root->right)
@@ -62,7 +62,7 @@ public:
         if(!root) return {};
         
         vector<int> res;
-        dfs(root, 1, res);
+        dfs(root, 0, res);
         return res;
     }
 };
