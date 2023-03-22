@@ -1,5 +1,11 @@
 class Solution {
 public:
+    struct CompareFirst {
+      bool operator()(const pair<int,int>& p1, const pair<int,int>& p2) {
+        return p1.first > p2.first;
+      }
+    };
+
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
         vector<vector<pair<int,int>>> adjList(n, vector<pair<int,int>>{});
         
@@ -8,7 +14,7 @@ public:
         vector<int> minTime(n, INT_MAX);   
         minTime[k-1] = 0;
         
-        priority_queue<pair<int,int>> q;
+        priority_queue<pair<int,int>, vector<pair<int,int>>, CompareFirst> q;
         q.push({k-1, 0});
         
         for(int i = 0; i < times.size(); i++) {
@@ -17,8 +23,7 @@ public:
             time = times[i][2];
             
             pair<int, int> temp(endNode, time);
-             adjList[startNode].push_back(temp);
-            // adjList[startNode][0].push_back({{endNode, time}});
+            adjList[startNode].push_back(temp);
         }
         
         while(!q.empty()){
