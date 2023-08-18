@@ -5,10 +5,10 @@ public:
         int col = (num - 1) % n;
 
         if(row % 2 != 0){
-            col = n - 1 - col; // Corrected calculation for odd rows
+            col = n - 1 - col; 
         }
 
-        return {row, col}; // Adjusted row calculation for reversed board
+        return {row, col}; 
     }
 
 
