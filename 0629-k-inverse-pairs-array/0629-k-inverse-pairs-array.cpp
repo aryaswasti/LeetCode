@@ -1,14 +1,18 @@
 class Solution {
-private:
-    int MOD = 1e9 + 7;
-    int dp[1001][1001] = {};
 public:
     int kInversePairs(int n, int k) {
-    int dp[1001][1001] = {1};
-    for (int N = 1; N <= n; ++N)
-        for (int K = 0; K <= k; ++K)
-            for (int i = 0; i <= min(K, N - 1); ++i)
-                dp[N][K] = (dp[N][K] + dp[N-1][K-i]) % MOD;
-    return dp[n][k];
+        int MOD = 1e9 + 7;
+        vector<vector<int>> dp(n+1,vector<int>(k+1,0));
+        for(int i=0;i<=n;i++)
+            dp[i][0] = 1;
+        for(int N = 1; N<=n; N++){
+            for(int K=1;K<=k;K++){
+                dp[N][K] = (dp[N-1][K]+dp[N][K-1])%MOD;
+                if(K-N>=0){
+                    dp[N][K] = (dp[N][K] - dp[N-1][K-N]+MOD)%MOD;
+                }
+            }
+        }
+        return dp[n][k];
     }
 };
