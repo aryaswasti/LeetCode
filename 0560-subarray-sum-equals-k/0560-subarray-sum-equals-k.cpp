@@ -18,6 +18,7 @@ public:
             if (umap.count(currSum-k) > 0)
                 ans += umap[currSum-k];
             
+            //add current sum to the map
             umap[currSum]++;
         }
         return ans;
