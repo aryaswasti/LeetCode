@@ -13,6 +13,7 @@ public:
             //calculating total sum to the left of element
             currSum += nums[i];
             
+            //similar to kadane's algorithm
             //currentNumber - target = number needed to reach target
             //if number to reach target exist => add umap count of the number to answer
             if (umap.count(currSum-k) > 0)
