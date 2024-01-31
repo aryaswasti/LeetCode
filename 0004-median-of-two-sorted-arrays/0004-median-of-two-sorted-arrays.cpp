@@ -46,16 +46,22 @@ public:
             if(l1<=r2 && l2<=r1){
                 //check if n1+n2 is odd
                 if((n1+n2)%2 == 1){
-                    
+                    //left side of array has more elements than right =>so max(l1, l2) will be the median 
                     return max(l1, l2);
                 }
+                //for even n1+n2 => it will be mean of 2 center elements
+                //from left side => max(l1, l2) 
+                //from right side => low(r1, r2)
                 return (double)((max(l1, l2) + min(r1, r2))/2.0);
-            } else if(l1 > l2) {
+            //since left(num1) > right(num2) => eliminate left of num1
+            } else if(l1 > r2) {
                 high = mid1 - 1;
+            //here left(num2) > right(num1) => want bigger number in num1, hence add a left elment in num1
             } else {
                 low = mid1 + 1;
             }
         }
+        //default return
         return 0;
     }
 };
