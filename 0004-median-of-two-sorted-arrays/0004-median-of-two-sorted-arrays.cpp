@@ -34,13 +34,21 @@ public:
             
             //initalise INT_MIN and INT_MAX to handle case of no elements
             
+            //check if r1, r2, l1, l2 exists
             if(mid1 < n1) r1 = nums1[mid1];
             if(mid2 < n2) r2 = nums2[mid2];
             if(mid1-1 >= 0) l1 = nums1[mid1-1];
             if(mid2-1 >= 0) l2 = nums2[mid2-1];
             
+            //check for valid case
+            //left < right is checked for left of one array with right of other array
+            //since array is sorted, we don't have to check left < right for same array
             if(l1<=r2 && l2<=r1){
-                if((n1+n2)%2 == 1) return max(l1, l2);
+                //check if n1+n2 is odd
+                if((n1+n2)%2 == 1){
+                    
+                    return max(l1, l2);
+                }
                 return (double)((max(l1, l2) + min(r1, r2))/2.0);
             } else if(l1 > l2) {
                 high = mid1 - 1;
