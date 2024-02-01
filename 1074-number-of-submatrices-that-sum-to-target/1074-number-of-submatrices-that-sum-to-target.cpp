@@ -11,7 +11,7 @@ private:
         for(int i=0; i<nums.size(); i++){
             //calculating total sum to the left of element
             currSum += nums[i];
-            //if current sum is eqaual to target
+            //if current sum is equal to target
             if(currSum == k){
                 ans++;
             }
