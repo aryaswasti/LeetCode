@@ -18,6 +18,7 @@ public:
                 if(nums[i+2]-nums[i] > k){
                     return {};
                 }
+                //Append the current subarray to the result
                 res.push_back({nums[i], nums[i+1], nums[i+2]});
             }
         }
