@@ -14,6 +14,7 @@ public:
         ListNode* slow = head;
         ListNode* fast = head;
         
+        //slow pointer will reach halfway when fast pionter reaches end of list
         while(fast!=NULL && fast->next!=NULL){
             slow=slow->next;
             fast=fast->next->next;
