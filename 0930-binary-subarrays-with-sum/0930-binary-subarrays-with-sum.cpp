@@ -11,6 +11,7 @@ private:
                 sum-=nums[left];
                 left++;
             }
+            //formula to calcumate subarrays => right-left+1
             ans+=right-left+1;
         }
         return ans;
@@ -18,6 +19,7 @@ private:
     
 public:
     int numSubarraysWithSum(vector<int>& nums, int goal) {
+        //atmost(subarrays with goal) - atmost(subarrays with goal-1) = exact(subarrays with goal)
         return atMost(nums, goal) - atMost(nums, goal-1);
     }
 };
