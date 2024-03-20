@@ -23,7 +23,7 @@ public:
         ListNode* remStart = NULL;
         ListNode* remEnd = NULL;
         
-        while(ptr1->next != NULL){
+        while(count <= b){
             if(count == a-1){
                 remStart = ptr1;
             } else if(count == b){
