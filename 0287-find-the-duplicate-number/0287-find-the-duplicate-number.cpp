@@ -24,6 +24,13 @@ public:
     }
 };
 
+auto init = []() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+    return 'c';
+}();
+
 
 // // Solution by making the vector negative
 // class Solution {
