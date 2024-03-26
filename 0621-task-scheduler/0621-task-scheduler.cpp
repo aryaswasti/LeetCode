@@ -1,23 +1,36 @@
 class Solution {
 public:
     int leastInterval(vector<char>& tasks, int n) {
-        unordered_map<char, int> taskCount;
-        for (char task : tasks) {
-            taskCount[task]++;
+        unordered_map<char,int> mpp;
+        for(auto task : tasks){
+            mpp[task]++;
         }
         
-        int maxTask = 0;
-        for (auto& kv : taskCount) {
-            maxTask = max(maxTask, kv.second);
+        priority_queue<int> pq;
+        for(auto i : mpp){
+            pq.push(i.second);
         }
         
-        int maxRepeats = 0;
-        for (auto& kv : taskCount) {
-            if (kv.second == maxTask) {
-                maxRepeats++;
+        queue<pair<int,int>> q;
+        int time = 0;
+        while(pq.size() > 0 or q.size() > 0){
+            if(pq.size() > 0){
+                int count = pq.top();
+                pq.pop();
+                time += 1;
+                --count;
+                if(count != 0) {
+                    q.push({count,time+n});   
+                }
+            }
+            if(q.size() > 0 and q.front().second <= time){
+                auto temp = q.front();q.pop();
+                pq.push(temp.first);
+            }
+            else if(pq.size()==0){
+                time++; // We need to do time -1 in the end because it will be increamenting it even when all task done
             }
         }
-        
-        return max((int)tasks.size(), maxTask * (1 + n) - n + maxRepeats - 1);
+        return time-1; 
     }
 };
