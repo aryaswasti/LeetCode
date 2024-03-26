@@ -27,6 +27,8 @@ public:
         }
 
         // If the number of nodes is odd, move slow to the next node
+        // while (fast && fast->next) this terminanted because of fast->next = NULL and fast != NULL(2 times)
+        // which means odd number on nodes
         if (fast)
             slow = slow->next;
 
@@ -34,7 +36,10 @@ public:
         while (prev && slow) {
             if (prev->val != slow->val)
                 return false;
+            
+            //prev acts as head to reverse node
             prev = prev->next;
+            //slow act as head to second node
             slow = slow->next;
         }
 
